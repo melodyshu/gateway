@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: path_route
+          uri: http://192.168.230.110:8888
+          predicates:
+            - Path=/hello/{segment}
+    consul:
+      host: 192.168.230.101
+      port: 8500
+      discovery:
+        service-name: service-gateway
